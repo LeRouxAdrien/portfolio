@@ -9,6 +9,8 @@
 <meta property="og:title" content="Adrien Le Roux, freelance software engineer">
 <meta property="og:description" content="I build the platforms other engineers ship on. Full-stack, CI/CD, Kubernetes, observability and AI agents. Remote across Europe.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://lerouxadrien.github.io/portfolio/">
+<link rel="canonical" href="https://lerouxadrien.github.io/portfolio/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -250,6 +252,22 @@ p { margin: 0; }
 .how .item h3 { font-size: 20px; font-weight: 600; margin-bottom: 6px; line-height: 1.25; }
 .how .item p { color: var(--muted); font-size: 16px; }
 
+/* ---------- Background ---------- */
+.timeline { border-top: 1px solid var(--line); }
+.tl { display: grid; grid-template-columns: 112px 1fr; gap: 6px 16px; padding: 18px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+@media (min-width: 760px) { .tl { grid-template-columns: 150px 250px 1fr; gap: 28px; padding: 20px 0; } }
+.tl .when { font: 500 13px var(--mono); color: var(--accent-ink); padding-top: 3px; white-space: nowrap; }
+.tl .where { font: 600 16px/1.35 var(--body); color: var(--fg); min-width: 0; display: flex; flex-direction: column; gap: 5px; align-items: flex-start; }
+.tl .where small { display: block; font: 400 13px/1.5 var(--mono); color: var(--faint); }
+.tl .where img { height: 20px; width: auto; max-width: 150px; filter: var(--logo-filter); opacity: .88; margin-top: 2px; }
+.tl .where img.sq { height: 24px; border-radius: 6px; filter: none; opacity: 1; }
+.tl .where img.tall { height: 26px; }
+.tl .where img.short { height: 17px; }
+.tl .where .mono { display: inline-grid; place-items: center; height: 24px; padding: 0 7px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); font: 600 11px var(--mono); letter-spacing: .08em; color: var(--muted); margin-top: 2px; }
+.tl p { grid-column: 2; color: var(--muted); font-size: 15px; max-width: 60ch; }
+@media (min-width: 760px) { .tl p { grid-column: auto; } }
+.tl.edu .when { color: var(--warm); }
+
 /* ---------- Contact ---------- */
 .contact { position: relative; overflow: hidden; }
 .contact::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(600px 320px at 50% 100%, var(--glow), transparent 65%); }
@@ -288,6 +306,7 @@ footer a:hover { color: var(--fg); }
       <a href="#work">Work</a>
       <a href="#stack">Stack</a>
       <a href="#approach">Approach</a>
+      <a href="#background">Background</a>
     </nav>
     <a class="btn sm primary" href="#contact">Start a mission</a>
   </div>
@@ -476,7 +495,7 @@ footer a:hover { color: var(--fg); }
     <article class="case">
       <div class="meta">
         <div class="co"><img src="assets/logos/st.svg" alt="STMicroelectronics"></div>
-        <h3>Earlier: cars, drones and a VPN</h3>
+        <h3>Earlier: a car, a Raspberry Pi and a VPN</h3>
         <span class="when">2020 → 2022</span>
       </div>
       <div class="body">
@@ -521,6 +540,28 @@ footer a:hover { color: var(--fg); }
   </div>
 </section>
 
+<section class="sec" id="background" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Background</span>
+      <h2>Where the five years come from.</h2>
+      <p>Engineering school in Angers, then four companies in three countries. The full history, with every detail, is on <a href="https://www.linkedin.com/in/adrien-le-roux-273015198/" target="_blank" rel="noopener" style="color:var(--accent-ink)">LinkedIn ↗</a>.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl"><span class="when">2026 → now</span><span class="where"><img src="assets/logos/signalatlas.svg" alt="SignalAtlas" class="sq">SignalAtlas<small>Own product · remote</small></span><p>Founder and only engineer: product, code, infrastructure and operations of a live market-analysis service.</p></div>
+      <div class="tl"><span class="when">2025 → now</span><span class="where"><img src="assets/logos/criteo.svg" alt="Criteo">Criteo<small>Paris · permanent</small></span><p>Software engineer on the continuous deployment platform used by 1,800+ engineers. Product owner on several platform initiatives.</p></div>
+      <div class="tl"><span class="when">2023 → 2025</span><span class="where"><img src="assets/logos/schneider.svg" alt="Schneider Electric" class="tall">Schneider Electric<small>Boston, USA · V.I.E.</small></span><p>Software / DevOps engineer in an R&amp;D IoT team: Go and Python micro-apps, CI/CD, OpenTelemetry observability, industrial protocols.</p></div>
+      <div class="tl"><span class="when">2022 → 2023</span><span class="where"><img src="assets/logos/schneider.svg" alt="Schneider Electric" class="tall">Schneider Electric<small>Grenoble · fixed-term</small></span><p>Edge computing engineer: C++ and Go micro-apps, performance work in C on small-memory Linux devices.</p></div>
+      <div class="tl"><span class="when">2022</span><span class="where"><img src="assets/logos/thales.svg" alt="Thales Alenia Space" class="tall">Thales Alenia Space<small>Toulouse · internship</small></span><p>Satellite image compression parallelised on an 80-core processor, in a 12-person proof-of-concept team.</p></div>
+      <div class="tl"><span class="when">2021 → 2022</span><span class="where"><img src="assets/logos/st.svg" alt="STMicroelectronics">STMicroelectronics<small>Le Mans · final-year project</small></span><p>Autonomous car on STM32MP1: lidar and BLE mapping, speech recognition, dual-core communication, new PCB.</p></div>
+      <div class="tl"><span class="when">2021</span><span class="where"><span class="mono" aria-hidden="true">FLYTEK · FLEEX</span>FlyTek · Fleex<small>Angers, Paris · freelance and project work</small></span><p>Embedded C on Raspberry Pi from spec to delivery for FlyTek. A freelance study of remote-working policies in every country for Fleex, which is how working remotely became the plan.</p></div>
+      <div class="tl"><span class="when">2020</span><span class="where"><span class="mono" aria-hidden="true">ORB GROUP</span>Orb Group (NDB)<small>London, UK · internship</small></span><p>Full-stack developer on a VPN user platform, in an international team. Mentored the interns who came after me.</p></div>
+      <div class="tl edu"><span class="when">2017 → 2022</span><span class="where"><img src="assets/logos/eseo.svg" alt="ESEO" class="tall">ESEO, engineering school<small>Angers · Diplôme d'ingénieur</small></span><p>Master's-level engineering degree, embedded systems and software architecture. Preparatory cycle, then specialisation in embedded systems and management. Google Hash Code participant.</p></div>
+      <div class="tl"><span class="when">2018</span><span class="where"><img src="assets/logos/thales-group.svg" alt="Thales" class="short">Thales<small>Cholet · summer job</small></span><p>First engineering environment: a visual management board for a production line and electrical integration work.</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="sec contact" id="contact">
   <div class="wrap">
     <span class="eyebrow">Contact</span>
@@ -544,12 +585,12 @@ footer a:hover { color: var(--fg); }
 <footer>
   <div class="wrap">
     <span>© 2026 Adrien Le Roux · Freelance software engineer</span>
-    <span><a href="https://getsignalatlas.com" target="_blank" rel="noopener">SignalAtlas</a> · <a href="https://www.linkedin.com/in/adrien-le-roux-273015198/" target="_blank" rel="noopener">LinkedIn</a></span>
+    <span><a href="https://getsignalatlas.com" target="_blank" rel="noopener">SignalAtlas</a> · <a href="https://www.linkedin.com/in/adrien-le-roux-273015198/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/LeRouxAdrien" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Adrien Le Roux","jobTitle":"Freelance software engineer","email":"mailto:adrien.leroux03@gmail.fr","url":"https://getsignalatlas.com","sameAs":["https://www.linkedin.com/in/adrien-le-roux-273015198/"],"address":{"@type":"PostalAddress","addressLocality":"Paris","addressCountry":"FR"},"knowsAbout":["TypeScript","React","C#","Python","Kubernetes","CI/CD","OpenTelemetry","AI agents","MCP"]}
+{"@context":"https://schema.org","@type":"Person","name":"Adrien Le Roux","jobTitle":"Freelance software engineer","email":"mailto:adrien.leroux03@gmail.fr","url":"https://lerouxadrien.github.io/portfolio/","sameAs":["https://www.linkedin.com/in/adrien-le-roux-273015198/","https://github.com/LeRouxAdrien","https://getsignalatlas.com"],"address":{"@type":"PostalAddress","addressLocality":"Paris","addressCountry":"FR"},"alumniOf":{"@type":"CollegeOrUniversity","name":"ESEO","address":{"@type":"PostalAddress","addressLocality":"Angers","addressCountry":"FR"}},"worksFor":{"@type":"Organization","name":"Criteo"},"knowsAbout":["TypeScript","React","C#","Python","Kubernetes","CI/CD","OpenTelemetry","AI agents","MCP"]}
 </script>
 <script>
 (function () {
