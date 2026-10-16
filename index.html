@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Adrien Le Roux</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Adrien Le Roux, freelance software engineer. Full-stack product engineering, CI/CD and platform work, AI agents and internal automation. Remote missions across Europe.">
+<meta property="og:title" content="Adrien Le Roux, freelance software engineer">
+<meta property="og:description" content="I build the platforms other engineers ship on. Full-stack, CI/CD, Kubernetes, observability and AI agents. Remote across Europe.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column, 1120px max, a deployment-log hero on the right, then quiet editorial sections.
+   Dark-first "mission control" palette in the SignalAtlas family; light theme mirrors it. */
+:root {
+  --bg: #0a1120;
+  --bg-2: #0f1829;
+  --panel: #131f33;
+  --line: #22314a;
+  --fg: #e8eef7;
+  --muted: #94a3b8;
+  --faint: #64748b;
+  --accent: #38bdf8;
+  --accent-ink: #38bdf8;
+  --accent-soft: rgba(56,189,248,0.12);
+  --glow: rgba(56,189,248,0.22);
+  --ok: #34d399;
+  --warm: #fbbf24;
+  --logo-filter: brightness(0) invert(1);
+  --shadow: 0 20px 60px rgba(0,0,0,0.45);
+  --display: "Bricolage Grotesque", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f4f7fb; --bg-2: #ffffff; --panel: #ffffff; --line: #d6dee9;
+    --fg: #0f1b2d; --muted: #4b5a6e; --faint: #7b889a;
+    --accent: #0b7fa8; --accent-ink: #0b7fa8; --accent-soft: rgba(11,127,168,0.10); --glow: rgba(11,127,168,0.18);
+    --ok: #059669; --warm: #b45309;
+    --logo-filter: brightness(0);
+    --shadow: 0 20px 50px rgba(15,27,45,0.12);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f4f7fb; --bg-2: #ffffff; --panel: #ffffff; --line: #d6dee9;
+  --fg: #0f1b2d; --muted: #4b5a6e; --faint: #7b889a;
+  --accent: #0b7fa8; --accent-ink: #0b7fa8; --accent-soft: rgba(11,127,168,0.10); --glow: rgba(11,127,168,0.18);
+  --ok: #059669; --warm: #b45309;
+  --logo-filter: brightness(0);
+  --shadow: 0 20px 50px rgba(15,27,45,0.12);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 17px/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.02em; }
+p { margin: 0; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  max-width: 1120px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 720px) { .wrap { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); } }
+
+.eyebrow { font: 500 12px/1.4 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-ink); }
+.sec { padding-block: 72px; }
+@media (min-width: 900px) { .sec { padding-block: 104px; } }
+.sec-head { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; max-width: 46ch; }
+.sec-head h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 700; line-height: 1.08; }
+.sec-head p { color: var(--muted); font-size: 17px; }
+.hr { height: 1px; background: linear-gradient(90deg, transparent, var(--line) 15%, var(--line) 85%, transparent); }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; font: 700 17px var(--display); letter-spacing: -0.01em; }
+.brand .mark { width: 28px; height: 28px; border-radius: 8px; background: var(--panel); border: 1px solid var(--line); display: grid; place-items: center; }
+.brand .mark svg { width: 18px; height: 18px; }
+.nav-links { display: none; gap: 28px; font: 500 14px var(--body); color: var(--muted); }
+.nav-links a:hover { color: var(--fg); }
+@media (min-width: 760px) { .nav-links { display: flex; } }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 10px;
+  font: 600 15px var(--body); border: 1px solid var(--line); background: var(--panel); color: var(--fg);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease; cursor: pointer; white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #06111f; }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.sm { height: 38px; padding: 0 14px; font-size: 14px; }
+.btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; padding-block: 64px 56px; }
+@media (min-width: 900px) { .hero { padding-block: 96px 88px; } }
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(700px 420px at 78% 20%, var(--glow), transparent 60%),
+    radial-gradient(500px 300px at 10% 90%, var(--accent-soft), transparent 60%);
+}
+.hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .35;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 60% 40%, black 10%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 60% 40%, black 10%, transparent 70%);
+}
+.hero .wrap { position: relative; display: grid; gap: 48px; align-items: center; }
+@media (min-width: 960px) { .hero .wrap { grid-template-columns: 1.05fr 0.95fr; gap: 56px; } }
+.hero-copy { display: flex; flex-direction: column; gap: 26px; min-width: 0; }
+.status { display: inline-flex; align-items: center; gap: 10px; font: 500 13px var(--mono); color: var(--muted); }
+.status .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 var(--ok); animation: pulse 2.2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent); } 70% { box-shadow: 0 0 0 10px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+.hero h1 { font-size: clamp(40px, 6.2vw, 74px); font-weight: 800; line-height: 1.0; letter-spacing: -0.035em; font-variation-settings: "opsz" 96; }
+.hero h1 em { font-style: normal; color: var(--accent-ink); }
+.lede { font-size: clamp(17px, 1.6vw, 20px); color: var(--muted); max-width: 56ch; line-height: 1.6; }
+.lede b { color: var(--fg); font-weight: 600; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.cta-row .link { font: 500 15px var(--body); color: var(--muted); display: inline-flex; align-items: center; gap: 6px; padding: 0 6px; }
+.cta-row .link:hover { color: var(--fg); }
+.me { display: flex; align-items: center; gap: 14px; margin-top: 4px; }
+.me img { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; object-position: 50% 20%; border: 2px solid var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.me .who { font-size: 14px; color: var(--muted); line-height: 1.4; }
+.me .who b { display: block; color: var(--fg); font: 600 15px var(--display); }
+
+/* terminal */
+.term {
+  min-width: 0; border-radius: 16px; background: var(--bg-2); border: 1px solid var(--line); box-shadow: var(--shadow);
+  overflow: hidden; font: 400 13.5px/1.75 var(--mono);
+}
+@media (min-width: 420px) { .term { font-size: 14px; } }
+.term-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.term-bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--line); display: block; }
+.term-bar span { margin-left: auto; font-size: 12px; color: var(--faint); }
+.term-body { padding: 18px 18px 16px; overflow-x: auto; }
+.term .line { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: baseline; transition: opacity .35s ease, transform .35s ease; }
+.term.js .line { opacity: 0; transform: translateY(4px); }
+.term.js .line.on { opacity: 1; transform: none; }
+.term .line.cmd { grid-template-columns: 1fr; color: var(--fg); margin-bottom: 8px; }
+.term .line.cmd .p { color: var(--accent-ink); }
+.term .k { color: var(--faint); }
+.term .step b { font-weight: 500; color: var(--fg); }
+.term .step .d { color: var(--muted); }
+.term .step > span:nth-child(2) { min-width: 0; }
+.term .line.cmd span { word-break: break-word; }
+.term .ok { color: var(--ok); font-weight: 500; }
+.term .out { grid-template-columns: 1fr; margin-top: 10px; color: var(--accent-ink); white-space: normal; }
+.term .cursor { display: inline-block; width: 8px; height: 15px; background: var(--accent); vertical-align: -2px; margin-left: 4px; animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- Logos ---------- */
+.logos { padding-block: 34px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
+.logos .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 22px 36px; }
+.logos .lbl { font: 500 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+.logos .row { display: flex; flex-wrap: wrap; align-items: center; gap: 26px 40px; }
+.logos img { height: 26px; width: auto; filter: var(--logo-filter); opacity: .62; transition: opacity .2s; }
+.logos img.tall { height: 34px; }
+.logos img:hover { opacity: 1; }
+
+/* ---------- Stats ---------- */
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+@media (min-width: 760px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stat { background: var(--panel); padding: 26px 22px; display: flex; flex-direction: column; gap: 6px; }
+.stat b { font: 700 clamp(30px, 3.4vw, 40px)/1 var(--display); letter-spacing: -0.03em; color: var(--accent-ink); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 14px; color: var(--muted); line-height: 1.4; }
+
+/* ---------- Services ---------- */
+.cards { display: grid; gap: 18px; }
+@media (min-width: 760px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 28px 26px;
+  display: flex; flex-direction: column; gap: 14px; min-width: 0; position: relative;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+.card .ico { width: 42px; height: 42px; border-radius: 12px; background: var(--accent-soft); display: grid; place-items: center; }
+.card .ico svg { width: 22px; height: 22px; fill: none; stroke: var(--accent-ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.card h3 { font-size: 22px; font-weight: 700; line-height: 1.2; }
+.card p { color: var(--muted); font-size: 16px; }
+.card .out { color: var(--fg); font-size: 15px; padding-top: 12px; border-top: 1px dashed var(--line); }
+.card .out b { color: var(--accent-ink); font-weight: 600; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags span { font: 500 12px/1 var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; white-space: nowrap; }
+
+/* ---------- Work ---------- */
+.case { display: grid; gap: 18px; padding: 36px 0; border-top: 1px solid var(--line); min-width: 0; }
+.case:last-child { border-bottom: 1px solid var(--line); }
+@media (min-width: 860px) { .case { grid-template-columns: 300px 1fr; gap: 48px; padding: 44px 0; } }
+.case .meta { display: flex; flex-direction: column; gap: 10px; }
+.case .meta .co { display: flex; align-items: center; gap: 12px; }
+.case .meta .co img { height: 22px; width: auto; filter: var(--logo-filter); opacity: .85; }
+.case .meta .co img.sq { height: 28px; border-radius: 7px; filter: none; opacity: 1; }
+.case .meta h3 { font-size: 26px; font-weight: 700; line-height: 1.15; }
+.case .meta .when { font: 500 13px var(--mono); color: var(--faint); }
+.case .meta .role { color: var(--muted); font-size: 15px; }
+.case .body { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.case .body p { color: var(--muted); max-width: 66ch; }
+.case .body p b { color: var(--fg); font-weight: 600; }
+.case ul { margin: 0; padding-left: 18px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; max-width: 66ch; }
+.case li::marker { color: var(--accent-ink); }
+.case.feature { background: linear-gradient(135deg, var(--accent-soft), transparent 55%); border: 1px solid var(--line); border-radius: 20px; padding: 32px 26px; margin-block: 18px; }
+@media (min-width: 860px) { .case.feature { padding: 40px 40px; } }
+.case.feature:last-child { border-bottom: 1px solid var(--line); }
+.pill { display: inline-flex; align-items: center; gap: 8px; font: 600 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent-soft); padding: 7px 10px; border-radius: 999px; width: fit-content; }
+.spark { width: 100%; max-width: 420px; height: auto; }
+.spark path { stroke: var(--accent); }
+.spark .fill { fill: var(--accent); opacity: .12; stroke: none; }
+.spark circle { fill: var(--accent); }
+.visit { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-ink); font-weight: 600; font-size: 15px; }
+.visit:hover { text-decoration: underline; }
+
+/* ---------- Stack ---------- */
+.stack { display: grid; gap: 18px; }
+@media (min-width: 760px) { .stack { grid-template-columns: repeat(3, 1fr); } }
+.group { background: var(--panel); border: 1px solid var(--line); border-top: 2px solid var(--accent); border-radius: 16px; padding: 22px 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.group b { font: 600 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pills span { font: 500 13px/1 var(--body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.pills span.hi { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); color: var(--fg); }
+
+/* ---------- Approach ---------- */
+.how { display: grid; gap: 14px; }
+@media (min-width: 760px) { .how { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+.how .item { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 22px 0; border-top: 1px solid var(--line); min-width: 0; }
+.how .item .n { font: 600 13px var(--mono); color: var(--accent-ink); padding-top: 5px; }
+.how .item h3 { font-size: 20px; font-weight: 600; margin-bottom: 6px; line-height: 1.25; }
+.how .item p { color: var(--muted); font-size: 16px; }
+
+/* ---------- Contact ---------- */
+.contact { position: relative; overflow: hidden; }
+.contact::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(600px 320px at 50% 100%, var(--glow), transparent 65%); }
+.contact .wrap { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+.contact h2 { font-size: clamp(34px, 5.4vw, 64px); font-weight: 800; line-height: 1.02; letter-spacing: -0.035em; max-width: 16ch; }
+.contact p { color: var(--muted); max-width: 54ch; font-size: 18px; }
+.email { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 6px; }
+.email code { font: 500 clamp(17px, 2.6vw, 24px) var(--mono); color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; user-select: all; word-break: break-all; }
+.email .copied { font: 500 13px var(--mono); color: var(--ok); min-width: 70px; }
+.links { display: flex; flex-wrap: wrap; gap: 12px; }
+.fine { font-size: 14px; color: var(--faint); }
+
+/* ---------- Footer ---------- */
+footer { border-top: 1px solid var(--line); padding-block: 28px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; font-size: 14px; color: var(--faint); }
+footer a:hover { color: var(--fg); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .status .dot, .term .cursor { animation: none; }
+  .term.js .line { opacity: 1; transform: none; transition: none; }
+  .btn, .card { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Adrien Le Roux, home">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l6-7 4 4 8-9"/><circle cx="21" cy="4" r="1.6" fill="var(--accent)" stroke="none"/></svg></span>
+      Adrien Le Roux
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#stack">Stack</a>
+      <a href="#approach">Approach</a>
+    </nav>
+    <a class="btn sm primary" href="#contact">Start a mission</a>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="status"><span class="dot" aria-hidden="true"></span>Open to remote freelance missions · Europe</span>
+      <h1>I build the platforms <em>other engineers ship on.</em></h1>
+      <p class="lede">Five years of full-stack and platform engineering: the deployment tooling behind <b>1,800+ engineers at Criteo</b>, an IoT edge stack at <b>Schneider Electric</b>, and <b>SignalAtlas</b>, a product I designed, built and run in production on my own.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#contact">Tell me about your project<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn" href="#work">See the work</a>
+        <a class="link" href="https://www.linkedin.com/in/adrien-le-roux-273015198/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+      <div class="me">
+        <img src="assets/photo.jpg" alt="Portrait of Adrien Le Roux" width="54" height="54">
+        <p class="who"><b>Adrien Le Roux</b>Software engineer · Paris, France · works remotely across Europe · EN / FR</p>
+      </div>
+    </div>
+
+    <div class="term" id="term" aria-label="How a mission with Adrien runs, shown as a deployment log">
+      <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>mission.log</span></div>
+      <div class="term-body">
+        <div class="line cmd"><span><span class="p">$</span> adrien deploy --mission your-project --remote europe</span></div>
+        <div class="line step"><span class="k">01</span><span><b>scope</b> <span class="d">· read the codebase, list the risks, agree the plan</span></span><span class="ok">done</span></div>
+        <div class="line step"><span class="k">02</span><span><b>build</b> <span class="d">· TypeScript · React · .NET · Python · tests included</span></span><span class="ok">done</span></div>
+        <div class="line step"><span class="k">03</span><span><b>ship</b> <span class="d">· CI/CD · Docker · Kubernetes · config as code</span></span><span class="ok">done</span></div>
+        <div class="line step"><span class="k">04</span><span><b>observe</b> <span class="d">· OpenTelemetry · Grafana · alerts in your Slack</span></span><span class="ok">done</span></div>
+        <div class="line step"><span class="k">05</span><span><b>hand over</b> <span class="d">· docs, runbook, a team that can run it</span></span><span class="ok">done</span></div>
+        <div class="line out"><span>✓ Live in production. No surprises on Friday evening.<span class="cursor" aria-hidden="true"></span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="logos" aria-label="Companies I have built for">
+  <div class="wrap">
+    <span class="lbl">Built and shipped at</span>
+    <div class="row">
+      <img src="assets/logos/criteo.svg" alt="Criteo">
+      <img src="assets/logos/schneider.svg" alt="Schneider Electric" class="tall">
+      <img src="assets/logos/thales.svg" alt="Thales Alenia Space" class="tall">
+      <img src="assets/logos/st.svg" alt="STMicroelectronics">
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-label="Key figures">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>5 yrs</b><span>full-stack and platform engineering</span></div>
+      <div class="stat"><b>1,800+</b><span>engineers using tooling I build, every day</span></div>
+      <div class="stat"><b>1</b><span>product designed, built and run solo, in production</span></div>
+      <div class="stat"><b>3</b><span>countries worked in: France, USA, UK</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="services" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Services</span>
+      <h2>Four things I do well, and what you get at the end.</h2>
+      <p>I take one problem at a time and own it from the first conversation to the last deploy. Every engagement ends with code your team can run without me.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2M7 9l2 2-2 2M12 13h4"/></svg></span>
+        <h3>Product engineering, end to end</h3>
+        <p>Features from the database schema to the React screen. New products, rewrites of a legacy module, or the next six months of a roadmap your team cannot staff.</p>
+        <div class="tags"><span>TypeScript</span><span>React</span><span>Next.js</span><span>Angular</span><span>Node.js</span><span>C# / .NET</span><span>Python / Django</span><span>PostgreSQL</span><span>React Native</span></div>
+        <p class="out"><b>You get</b>Features shipped with tests, migrations and the screen that uses them.</p>
+      </article>
+      <article class="card">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="8" cy="7" r="1.6" fill="var(--accent-ink)"/><circle cx="15" cy="12" r="1.6" fill="var(--accent-ink)"/><circle cx="10" cy="17" r="1.6" fill="var(--accent-ink)"/></svg></span>
+        <h3>Platform, CI/CD and reliability</h3>
+        <p>Deployment tooling, pipelines, containers, and the dashboards that tell you it works. The same work I do today for a platform used by 1,800 engineers.</p>
+        <div class="tags"><span>Docker</span><span>Kubernetes</span><span>Concourse CI</span><span>GitHub Actions</span><span>GitLab CI</span><span>Helm</span><span>OpenTelemetry</span><span>Grafana</span><span>Prometheus</span></div>
+        <p class="out"><b>You get</b>Releases that take minutes, alerts that mean something, and a runbook.</p>
+      </article>
+      <article class="card">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><rect x="7" y="7" width="10" height="10" rx="3"/><path d="M10 12h4"/></svg></span>
+        <h3>AI agents and internal automation</h3>
+        <p>MCP servers, chat bots and agent workflows that remove recurring interruptions. I built one at Criteo that answers the platform team's support questions, and I work with coding agents every day.</p>
+        <div class="tags"><span>MCP servers</span><span>Claude / LLM APIs</span><span>Slack bots</span><span>Agent workflows</span><span>Python</span><span>TypeScript</span></div>
+        <p class="out"><b>You get</b>Fewer tickets, faster answers, and engineers who stay in flow.</p>
+      </article>
+      <article class="card">
+        <span class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9zM9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></span>
+        <h3>Edge, IoT and systems software</h3>
+        <p>Go, Python and C++ services on constrained Linux devices, with industrial protocols and a cloud link. Two years of this at Schneider Electric, in Boston and Grenoble.</p>
+        <div class="tags"><span>Go</span><span>C / C++</span><span>Linux</span><span>MQTT</span><span>OPC UA</span><span>Modbus</span><span>EdgeX Foundry</span><span>Azure</span></div>
+        <p class="out"><b>You get</b>Software that runs for months on a box nobody can reboot.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="work" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Selected work</span>
+      <h2>Platforms, products and a satellite.</h2>
+      <p>Real systems, in production, with the numbers that were true when I worked on them.</p>
+    </div>
+
+    <article class="case">
+      <div class="meta">
+        <div class="co"><img src="assets/logos/criteo.svg" alt="Criteo"></div>
+        <h3>Continuous deployment platform</h3>
+        <span class="when">2025 → present · Paris</span>
+        <p class="role">Software engineer, CD platform team</p>
+      </div>
+      <div class="body">
+        <p>The in-house platform <b>1,800+ Criteo engineers</b> use to ship to production. I own features end to end across a Groovy back end, Angular and React front ends in TypeScript, C# and Python services, Concourse CI jobs and workloads on Mesos and Kubernetes.</p>
+        <ul>
+          <li>Reworked the deployment data schema and indexes, which sped up the hot paths, and added Hangfire locking so instance operations stay atomic under concurrent use.</li>
+          <li>Built an MCP server and AI agents that answer recurring support questions, plus Slack notifications for deployment events. The engineer on duty gets interrupted far less.</li>
+          <li>Replaced a legacy Lua service on an ad-operations platform with an audited Django REST API, a scoped LDAP-mapped service role and full permission tests.</li>
+          <li>Product owner on several platform initiatives, from scoping to delivery and OKR follow-up.</li>
+        </ul>
+        <div class="tags"><span>Groovy</span><span>C#</span><span>TypeScript</span><span>Angular</span><span>React</span><span>Python</span><span>Scala</span><span>Concourse CI</span><span>Kubernetes</span><span>Mesos</span><span>PostgreSQL</span><span>MCP</span></div>
+      </div>
+    </article>
+
+    <article class="case feature">
+      <div class="meta">
+        <span class="pill"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg>Own product · live</span>
+        <div class="co"><img src="assets/logos/signalatlas.svg" alt="SignalAtlas" class="sq"><h3>SignalAtlas</h3></div>
+        <span class="when">2026 → present · solo</span>
+        <p class="role">Design, engineering, infrastructure and operations</p>
+        <svg class="spark" viewBox="0 0 420 120" aria-hidden="true">
+          <path class="fill" d="M0 100 L40 86 L75 94 L110 60 L150 72 L190 44 L230 58 L270 28 L310 40 L350 14 L390 26 L420 10 L420 120 L0 120 Z"/>
+          <path d="M0 100 L40 86 L75 94 L110 60 L150 72 L190 44 L230 58 L270 28 L310 40 L350 14 L390 26 L420 10" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="420" cy="10" r="5"/>
+        </svg>
+      </div>
+      <div class="body">
+        <p>A market-analysis product I took <b>from first commit to production</b>, with AI coding agents in the loop. Web app in React, TypeScript and Vite; mobile app in React Native with Expo; Node.js and Python services behind both.</p>
+        <ul>
+          <li>Python analysis engine that turns market data into portfolio insights and automated alerts.</li>
+          <li>Multi-service setup with Docker, nginx and Redis; builds, tests and releases automated with CI/CD and a Makefile.</li>
+          <li>Sign-in with OAuth2 / OpenID Connect, role-based access, GDPR handled from day one.</li>
+          <li>Grafana dashboards and structured logs in production; internal ops tooling; bilingual FR / EN, prerendered for SEO.</li>
+        </ul>
+        <div class="tags"><span>React</span><span>TypeScript</span><span>Vite</span><span>React Native</span><span>Expo</span><span>Node.js</span><span>Python</span><span>Docker</span><span>nginx</span><span>Redis</span><span>OAuth2 / OIDC</span><span>Grafana</span></div>
+        <a class="visit" href="https://getsignalatlas.com" target="_blank" rel="noopener">Visit getsignalatlas.com ↗</a>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="meta">
+        <div class="co"><img src="assets/logos/schneider.svg" alt="Schneider Electric"></div>
+        <h3>IoT edge platform</h3>
+        <span class="when">2022 → 2025 · Boston, USA and Grenoble</span>
+        <p class="role">Software / DevOps engineer, R&amp;D IoT</p>
+      </div>
+      <div class="body">
+        <p>Micro-apps in Go and Python for an industrial edge platform, deployed with Docker, Kubernetes and EdgeX Foundry inside a <b>300-person engineering organisation</b>. Contributor to the MARGO open orchestration initiative.</p>
+        <ul>
+          <li>Stood up the CI/CD validation infrastructure: Robot Framework, GitHub Actions, Coverity and SonarQube.</li>
+          <li>Prototyped, then integrated OpenTelemetry and OpenSearch as Go microservices, with exporters feeding Jaeger, Grafana, Zipkin and Prometheus.</li>
+          <li>Designed the middleware between services (MQTT, Redis, OPC UA, Modbus) and the link from edge apps to Azure. Performance work in C on memory-constrained Linux devices.</li>
+        </ul>
+        <div class="tags"><span>Go</span><span>Python</span><span>C++</span><span>Docker</span><span>Kubernetes</span><span>GitHub Actions</span><span>OpenTelemetry</span><span>OpenSearch</span><span>Prometheus</span><span>MQTT</span><span>Azure</span></div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="meta">
+        <div class="co"><img src="assets/logos/thales.svg" alt="Thales Alenia Space" style="height:30px"></div>
+        <h3>On-board image compression, 80 cores</h3>
+        <span class="when">2022 · Toulouse</span>
+        <p class="role">Edge computing engineer</p>
+      </div>
+      <div class="body">
+        <p>Ported the <b>CCSDS 122</b> satellite image-compression algorithm to a Kalray many-core processor and parallelised it across <b>80 cores</b> in C / C++ with OpenCL and OpenMP, for a 12-person proof-of-concept team. Docker-based validation and GitLab CI with automatic tests.</p>
+        <div class="tags"><span>C / C++</span><span>OpenCL</span><span>OpenMP</span><span>Linux</span><span>Docker</span><span>GitLab CI</span></div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="meta">
+        <div class="co"><img src="assets/logos/st.svg" alt="STMicroelectronics"></div>
+        <h3>Earlier: cars, drones and a VPN</h3>
+        <span class="when">2020 → 2022</span>
+      </div>
+      <div class="body">
+        <p>An autonomous car on STM32MP1 with STMicroelectronics (GTK interface, lidar and BLE mapping, A7 / M4 core communication, new PCB). Embedded C on Raspberry Pi for FlyTek, run as a full V-cycle from spec to delivery. A full-stack internship on a VPN user platform at Orb Group in London (JavaScript, PHP, SQL), where I also mentored the next interns.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sec" id="stack">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Stack</span>
+      <h2>Build it, run it, know it works.</h2>
+      <p>Highlighted: what I reach for first. The rest I have shipped with in production.</p>
+    </div>
+    <div class="stack">
+      <div class="group"><b>Build</b><div class="pills"><span class="hi">TypeScript</span><span class="hi">React</span><span class="hi">Next.js</span><span>Angular</span><span>React Native</span><span class="hi">C# / .NET</span><span class="hi">Python</span><span>Django</span><span>Node.js</span><span>Go</span><span>Groovy</span><span>Scala</span><span>C / C++</span><span>SQL / PostgreSQL</span><span>Supabase</span><span class="hi">AI agents · MCP</span></div></div>
+      <div class="group"><b>Run</b><div class="pills"><span class="hi">Docker</span><span class="hi">Kubernetes</span><span>Mesos</span><span>nginx</span><span>Concourse CI</span><span class="hi">GitHub Actions</span><span>GitLab CI</span><span>Helm</span><span>Ansible</span><span>Azure</span><span>Redis</span><span>Config as code</span><span>MQTT</span><span>OPC UA</span><span>Modbus</span></div></div>
+      <div class="group"><b>Observe &amp; secure</b><div class="pills"><span class="hi">OpenTelemetry</span><span>Prometheus</span><span class="hi">Grafana</span><span>OpenSearch</span><span>Jaeger</span><span>Zipkin</span><span>Structured logging</span><span>OAuth2 / OIDC</span><span>RBAC</span><span>GDPR</span><span>Tests &amp; CI gates</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<section class="sec" id="approach">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">How I work</span>
+      <h2>Remote by default, boring in the best way.</h2>
+      <p>Clients hire me to remove a problem, not to add meetings. Here is what that looks like week to week.</p>
+    </div>
+    <div class="how">
+      <div class="item"><span class="n">01</span><div><h3>Your time zone, your tools</h3><p>Based in Paris (CET), fully remote, with real overlap for every European team. I join your Slack, your repo and your rituals, and I have worked on-site in Boston and London when it mattered.</p></div></div>
+      <div class="item"><span class="n">02</span><div><h3>Tests and a runbook ship with the code</h3><p>Nothing goes to production without automated checks and a page that explains how to run it, roll it back and debug it at 2 a.m.</p></div></div>
+      <div class="item"><span class="n">03</span><div><h3>Short loops, visible progress</h3><p>A demo every week, written updates you can forward, and decisions recorded where your team will find them later.</p></div></div>
+      <div class="item"><span class="n">04</span><div><h3>AI-assisted, human-reviewed</h3><p>I use coding agents daily to move faster on the repetitive parts, and I review, test and own every line that lands.</p></div></div>
+      <div class="item"><span class="n">05</span><div><h3>English and French, fluently</h3><p>Specs, code review, stand-ups and client calls in either language. Native French, fluent English after two years in the US.</p></div></div>
+      <div class="item"><span class="n">06</span><div><h3>Engagements that fit</h3><p>Typically 3 to 12 months, full time or part time, invoiced business to business. Day rate on request, with a fixed scope when the problem is well defined.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Contact</span>
+    <h2>Tell me about the mission.</h2>
+    <p>A short note with the problem, the stack and the timing is enough. I usually reply within a day, and the first call is free.</p>
+    <div class="email">
+      <code id="email">adrien.leroux03@gmail.fr</code>
+      <button class="btn" id="copy" type="button"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button>
+      <span class="copied" id="copied" aria-live="polite"></span>
+    </div>
+    <div class="links">
+      <a class="btn primary" href="mailto:adrien.leroux03@gmail.fr?subject=Freelance%20mission">Write an email<svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z M4 6l8 7 8-7"/></svg></a>
+      <a class="btn" href="https://www.linkedin.com/in/adrien-le-roux-273015198/" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
+    </div>
+    <p class="fine">Paris, France · remote across Europe · CET</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Adrien Le Roux · Freelance software engineer</span>
+    <span><a href="https://getsignalatlas.com" target="_blank" rel="noopener">SignalAtlas</a> · <a href="https://www.linkedin.com/in/adrien-le-roux-273015198/" target="_blank" rel="noopener">LinkedIn</a></span>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Adrien Le Roux","jobTitle":"Freelance software engineer","email":"mailto:adrien.leroux03@gmail.fr","url":"https://getsignalatlas.com","sameAs":["https://www.linkedin.com/in/adrien-le-roux-273015198/"],"address":{"@type":"PostalAddress","addressLocality":"Paris","addressCountry":"FR"},"knowsAbout":["TypeScript","React","C#","Python","Kubernetes","CI/CD","OpenTelemetry","AI agents","MCP"]}
+</script>
+<script>
+(function () {
+  var term = document.getElementById('term');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (term && !reduce) {
+    term.classList.add('js');
+    var lines = term.querySelectorAll('.line');
+    var delays = [80, 380, 640, 900, 1160, 1420, 1900];
+    lines.forEach(function (el, i) { setTimeout(function () { el.classList.add('on'); }, delays[i] || 300 * i); });
+  }
+  var btn = document.getElementById('copy');
+  var out = document.getElementById('copied');
+  var email = document.getElementById('email');
+  if (btn) btn.addEventListener('click', function () {
+    var text = email.textContent.trim();
+    function done(ok) { out.textContent = ok ? 'copied' : 'select and copy'; setTimeout(function () { out.textContent = ''; }, 2200); }
+    function fallback() {
+      try { var r = document.createRange(); r.selectNodeContents(email); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch (e) {}
+      done(false);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { done(true); }, fallback);
+    else fallback();
+  });
+})();
+</script>
+</body>
+</html>
