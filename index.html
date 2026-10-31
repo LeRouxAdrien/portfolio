@@ -10,6 +10,11 @@
 <meta property="og:description" content="I build the platforms other engineers ship on. Full-stack, CI/CD, Kubernetes, observability and AI agents. Remote across Europe.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://lerouxadrien.github.io/portfolio/">
+<meta property="og:image" content="https://lerouxadrien.github.io/portfolio/assets/film/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Illustrated still from Adrien Le Roux's 90-second film: a smiling engineer in a navy hoodie, colleagues applauding, every screen green.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lerouxadrien.github.io/portfolio/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -183,6 +188,86 @@ p { margin: 0; }
 .logos img.tall { height: 34px; }
 .logos img:hover { opacity: 1; }
 
+/* ---------- Film ---------- */
+.film { position: relative; overflow: hidden; }
+.film::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(760px 420px at 50% 62%, var(--glow), transparent 68%);
+}
+.film .wrap { position: relative; }
+.film-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px 40px; margin-bottom: 36px; }
+.film-top .sec-head { margin-bottom: 0; }
+.film-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.film-meta span { font: 500 12px/1 var(--mono); color: var(--muted); border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 8px 12px; white-space: nowrap; }
+.film-meta span b { color: var(--accent-ink); font-weight: 500; }
+
+.player { margin: 0; border-radius: 20px; background: var(--bg-2); border: 1px solid var(--line); box-shadow: var(--shadow), 0 0 0 1px color-mix(in srgb, var(--accent) 10%, transparent); overflow: hidden; }
+.player-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--panel); font: 400 12px var(--mono); color: var(--faint); }
+.player-bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--line); display: block; }
+.player-bar .rec { margin-left: 8px; color: var(--muted); }
+.player-bar .rec::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); margin-right: 8px; vertical-align: 1px; }
+.player-bar .t { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+.screen { position: relative; aspect-ratio: 16 / 9; background: #050a14; }
+.screen video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: #050a14; object-fit: cover; }
+.screen video::cue { font-family: var(--body); font-weight: 500; color: #fff; background: rgba(5,10,20,.72); line-height: 1.35; font-size: 18px; }
+@media (max-width: 560px) { .screen video::cue { font-size: 12px; } }
+
+.cover {
+  position: absolute; inset: 0; display: flex; align-items: flex-end; padding: clamp(14px, 3vw, 28px);
+  background: linear-gradient(180deg, rgba(5,10,20,.05) 30%, rgba(5,10,20,.72) 100%), url("assets/film/poster.jpg") center / cover no-repeat;
+  border: 0; cursor: pointer; color: #fff; font: inherit; width: 100%;
+  transition: opacity .45s ease, visibility .45s;
+}
+.cover:focus-visible { outline: 2px solid var(--accent); outline-offset: -6px; border-radius: 0; }
+.cover .btnplay { position: relative; flex: none; width: 72px; height: 72px; border-radius: 50%; background: #38bdf8; display: grid; place-items: center; box-shadow: 0 10px 40px rgba(56,189,248,.45); transition: transform .25s ease; }
+.cover .btnplay::before, .cover .btnplay::after { content: ""; position: absolute; inset: -10px; border-radius: 50%; border: 1.5px solid rgba(56,189,248,.65); animation: ripple 2.4s ease-out infinite; }
+.cover .btnplay::after { animation-delay: 1.2s; }
+.cover .btnplay svg { width: 26px; height: 26px; margin-left: 4px; fill: #06111f; }
+.cover:hover .btnplay { transform: scale(1.06); }
+@keyframes ripple { 0% { transform: scale(.85); opacity: .9; } 100% { transform: scale(1.45); opacity: 0; } }
+.cover .cap { flex: 1; display: flex; align-items: center; gap: clamp(14px, 2vw, 22px); text-align: left; min-width: 0; }
+.cover .cap .txt { min-width: 0; }
+.cover .cap b { display: block; font: 700 clamp(18px, 2.4vw, 28px)/1.15 var(--display); letter-spacing: -0.02em; text-shadow: 0 2px 18px rgba(0,0,0,.5); }
+.cover .cap small { display: block; margin-top: 4px; font: 500 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: rgba(232,238,247,.8); }
+.cover .cap .dur { margin-left: auto; align-self: flex-end; font: 500 13px/1 var(--mono); background: rgba(5,10,20,.6); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: 8px 12px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); white-space: nowrap; }
+@media (max-width: 560px) { .cover .btnplay { width: 52px; height: 52px; } .cover .btnplay svg { width: 20px; height: 20px; } .cover .cap small, .cover .cap .dur { display: none; } }
+
+.endcard {
+  position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 16px; padding: 20px; text-align: center;
+  background: rgba(5,10,20,.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #e8eef7;
+  opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility .45s;
+}
+.endcard h3 { font-size: clamp(22px, 3.4vw, 38px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
+.endcard p { color: #94a3b8; font-size: 15px; max-width: 40ch; }
+.endcard .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.endcard .btn:not(.primary) { background: rgba(19,31,51,.9); border-color: #22314a; color: #e8eef7; }
+.endcard .btn.primary { background: #38bdf8; border-color: #38bdf8; }
+@media (max-width: 560px) { .endcard p { display: none; } .endcard h3 { font-size: 22px; } }
+
+.player.playing .cover, .player.ended .cover { opacity: 0; visibility: hidden; }
+.player.ended .endcard { opacity: 1; visibility: visible; }
+
+.chapters { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
+@media (min-width: 760px) { .chapters { grid-template-columns: repeat(3, 1fr); } }
+.chapters li + li { border-top: 1px solid var(--line); }
+@media (min-width: 760px) { .chapters li + li { border-top: 0; border-left: 1px solid var(--line); } }
+.chapters button {
+  position: relative; width: 100%; text-align: left; background: none; border: 0; color: inherit; font: inherit; cursor: pointer;
+  display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; padding: 18px 20px 20px; transition: background .2s ease;
+}
+.chapters button:hover { background: var(--accent-soft); }
+.chapters button:focus-visible { outline-offset: -3px; }
+.chapters .k { grid-row: span 2; font: 500 12px/1.9 var(--mono); color: var(--faint); font-variant-numeric: tabular-nums; }
+.chapters b { font: 600 16px/1.35 var(--display); color: var(--fg); }
+.chapters .d { font-size: 14px; line-height: 1.45; color: var(--muted); }
+.chapters .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: transparent; }
+.chapters .bar::after { content: ""; position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(var(--p, 0)); }
+.chapters li.on .k { color: var(--accent-ink); }
+.chapters li.on button { background: var(--accent-soft); }
+.film-note { display: flex; gap: 10px; align-items: flex-start; margin-top: 18px; font-size: 14px; color: var(--faint); max-width: 76ch; }
+.film-note svg { flex: none; width: 16px; height: 16px; margin-top: 3px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
 /* ---------- Stats ---------- */
 .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
 @media (min-width: 760px) { .stats { grid-template-columns: repeat(4, 1fr); } }
@@ -290,6 +375,7 @@ footer a:hover { color: var(--fg); }
   .status .dot, .term .cursor { animation: none; }
   .term.js .line { opacity: 1; transform: none; transition: none; }
   .btn, .card { transition: none; }
+  .cover .btnplay::before, .cover .btnplay::after { animation: none; opacity: 0; }
 }
 </style>
 </head>
@@ -302,6 +388,7 @@ footer a:hover { color: var(--fg); }
       Adrien Le Roux
     </a>
     <nav class="nav-links" aria-label="Sections">
+      <a href="#film">Film</a>
       <a href="#services">Services</a>
       <a href="#work">Work</a>
       <a href="#stack">Stack</a>
@@ -323,6 +410,7 @@ footer a:hover { color: var(--fg); }
       <div class="cta-row">
         <a class="btn primary" href="#contact">Tell me about your project<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="btn" href="#work">See the work</a>
+        <a class="link" href="#film" data-play-film><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>Watch the 90-second film</a>
         <a class="link" href="https://www.linkedin.com/in/adrien-le-roux-273015198/" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
       <div class="me">
@@ -358,7 +446,51 @@ footer a:hover { color: var(--fg); }
   </div>
 </section>
 
-<section class="sec" aria-label="Key figures">
+<section class="sec film" id="film" aria-labelledby="film-title">
+  <div class="wrap">
+    <div class="film-top">
+      <div class="sec-head">
+        <span class="eyebrow">The 90-second version</span>
+        <h2 id="film-title">Release day, in ninety seconds.</h2>
+        <p>A short film about the job: a deploy that will not ship, the systems I have built, and how I work with the people around me.</p>
+      </div>
+      <div class="film-meta" aria-hidden="true"><span><b>1:30</b> runtime</span><span>Sound on</span><span>EN subtitles</span></div>
+    </div>
+
+    <figure class="player" id="player">
+      <div class="player-bar" aria-hidden="true"><i></i><i></i><i></i><span class="rec">release-day.mp4</span><span class="t" id="film-time">00:00 / 01:30</span></div>
+      <div class="screen">
+        <video id="film-video" preload="none" playsinline width="1920" height="1080" poster="assets/film/poster.jpg" aria-label="Release day: a 90-second film about Adrien Le Roux's work">
+          <source src="assets/film/showreel.mp4" type="video/mp4">
+          <track kind="subtitles" srclang="en" label="English" src="assets/film/showreel.en.vtt" default>
+        </video>
+        <button class="cover" id="film-cover" type="button" aria-label="Play the 90-second film, with sound">
+          <span class="cap" aria-hidden="true">
+            <span class="btnplay"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+            <span class="txt"><b>Release day, ten a.m.</b><small>A film in three acts · sound on</small></span>
+            <span class="dur">01:30</span>
+          </span>
+        </button>
+        <div class="endcard" id="film-end">
+          <h3>Your turn. What are we shipping?</h3>
+          <p>A short note with the problem, the stack and the timing is enough. The first call is free.</p>
+          <div class="row">
+            <a class="btn primary" href="#contact">Tell me about your mission<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <button class="btn" type="button" id="film-replay"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>Watch again</button>
+          </div>
+        </div>
+      </div>
+      <ol class="chapters" id="film-chapters" aria-label="Chapters">
+        <li><button type="button" data-t="0"><span class="k">00:00</span><b>Release day</b><span class="d">A stuck pipeline, and a team waiting on one deploy.</span><i class="bar" aria-hidden="true"></i></button></li>
+        <li><button type="button" data-t="30"><span class="k">00:30</span><b>The proof</b><span class="d">Thales Alenia Space, Schneider Electric, Criteo, SignalAtlas.</span><i class="bar" aria-hidden="true"></i></button></li>
+        <li><button type="button" data-t="60"><span class="k">01:00</span><b>The human side</b><span class="d">Weekly demos, runbooks, mentoring, AI reviewed by a human.</span><i class="bar" aria-hidden="true"></i></button></li>
+      </ol>
+    </figure>
+    <p class="film-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>Images and voice-over are AI-generated. Every fact in the script comes from my CV.</p>
+  </div>
+</section>
+
+<section class="sec" aria-label="Key figures" style="padding-top:0">
   <div class="wrap">
     <div class="stats">
       <div class="stat"><b>5 yrs</b><span>full-stack and platform engineering</span></div>
@@ -606,6 +738,55 @@ footer a:hover { color: var(--fg); }
     var delays = [80, 380, 640, 900, 1160, 1420, 1900];
     lines.forEach(function (el, i) { setTimeout(function () { el.classList.add('on'); }, delays[i] || 300 * i); });
   }
+  var player = document.getElementById('player');
+  var video = document.getElementById('film-video');
+  if (player && video) {
+    var chapters = [].slice.call(document.querySelectorAll('#film-chapters li'));
+    var clock = document.getElementById('film-time');
+    var starts = [0, 30, 60], total = 90;
+    var fmt = function (s) { s = Math.max(0, Math.floor(s)); return ('0' + Math.floor(s / 60)).slice(-2) + ':' + ('0' + s % 60).slice(-2); };
+    var seek = function (t) {
+      if (video.readyState >= 1) { video.currentTime = t; return; }
+      video.addEventListener('loadedmetadata', function once() { video.removeEventListener('loadedmetadata', once); video.currentTime = t; });
+    };
+    var play = function (t) {
+      player.classList.remove('ended');
+      player.classList.add('playing');
+      video.controls = true;
+      if (video.textTracks && video.textTracks[0]) video.textTracks[0].mode = 'showing';
+      if (typeof t === 'number') seek(t);
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    document.getElementById('film-cover').addEventListener('click', function () { play(); });
+    document.getElementById('film-replay').addEventListener('click', function () { play(0); });
+    chapters.forEach(function (li, i) {
+      li.querySelector('button').addEventListener('click', function () { play(starts[i]); });
+    });
+    [].slice.call(document.querySelectorAll('[data-play-film]')).forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        player.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+        play();
+      });
+    });
+    video.addEventListener('timeupdate', function () {
+      var t = video.currentTime, d = video.duration || total;
+      if (clock) clock.textContent = fmt(t) + ' / ' + fmt(d);
+      chapters.forEach(function (li, i) {
+        var a = starts[i], b = starts[i + 1] || d;
+        var p = Math.min(1, Math.max(0, (t - a) / (b - a)));
+        li.querySelector('.bar').style.setProperty('--p', p);
+        li.classList.toggle('on', t >= a && t < b);
+      });
+    });
+    video.addEventListener('ended', function () {
+      player.classList.remove('playing');
+      player.classList.add('ended');
+      video.controls = false;
+    });
+  }
+
   var btn = document.getElementById('copy');
   var out = document.getElementById('copied');
   var email = document.getElementById('email');
