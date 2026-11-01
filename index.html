@@ -585,14 +585,16 @@ footer a:hover { color: var(--fg); }
         </svg>
       </div>
       <div class="body">
-        <p>A market-analysis product I took <b>from first commit to production</b>, with AI coding agents in the loop. Web app in React, TypeScript and Vite; mobile app in React Native with Expo; Node.js and Python services behind both.</p>
+        <p>A market-analysis product I took <b>from first commit to production</b>, with AI coding agents in the loop. Web app in React, TypeScript and Vite, an Electron desktop app, and an <b>Android + iOS app</b> from a single React Native / Expo codebase; Node.js and Python services behind them.</p>
         <ul>
-          <li>Python analysis engine that turns market data into portfolio insights and automated alerts.</li>
-          <li>Multi-service setup with Docker, nginx and Redis; builds, tests and releases automated with CI/CD and a Makefile.</li>
-          <li>Sign-in with OAuth2 / OpenID Connect, role-based access, GDPR handled from day one.</li>
-          <li>Grafana dashboards and structured logs in production; internal ops tooling; bilingual FR / EN, prerendered for SEO.</li>
+          <li>Python analysis engine that turns market data into portfolio insights, multi-strategy backtests and automated alerts.</li>
+          <li><b>Mobile:</b> multi-currency portfolio tracking, 5-year strategy backtests, 6-hour AI forecasts drawn as three-scenario SVG charts, alerts on AI decisions. Business logic shared with the desktop app through a tested pure-TypeScript library, parity-checked in CI.</li>
+          <li><b>Mobile security:</b> tokens in Keychain / Keystore, PIN lock (PBKDF2) and biometrics, certificate pinning, screenshots blocked, OS backups disabled.</li>
+          <li><b>Offline first:</b> local cache and a write queue replayed on reconnect, multi-device conflict handling, retries with backoff, opt-in crash reporting with no third-party SDK, minimum version enforced by the server.</li>
+          <li>Two builds from one codebase: the public app and a separate admin app (HMAC-signed trading orders behind a biometric check), with secrets kept out of the public binary. Signed Gradle / Xcode builds shipped with EAS and fastlane to TestFlight and Google Play.</li>
+          <li>Docker, nginx, Redis and PostgreSQL; Keycloak (OAuth2 / OpenID Connect, roles), Stripe, GDPR from day one; Vitest and GitHub Actions CI; Grafana dashboards and structured logs in production; bilingual FR / EN.</li>
         </ul>
-        <div class="tags"><span>React</span><span>TypeScript</span><span>Vite</span><span>React Native</span><span>Expo</span><span>Node.js</span><span>Python</span><span>Docker</span><span>nginx</span><span>Redis</span><span>OAuth2 / OIDC</span><span>Grafana</span></div>
+        <div class="tags"><span>React</span><span>TypeScript</span><span>Vite</span><span>React Native</span><span>Expo</span><span>Android</span><span>iOS</span><span>Electron</span><span>Node.js</span><span>Python</span><span>PostgreSQL</span><span>Docker</span><span>nginx</span><span>Redis</span><span>Keycloak / OIDC</span><span>Stripe</span><span>fastlane</span><span>Grafana</span></div>
         <a class="visit" href="https://getsignalatlas.com" target="_blank" rel="noopener">Visit getsignalatlas.com ↗</a>
       </div>
     </article>
@@ -649,9 +651,9 @@ footer a:hover { color: var(--fg); }
       <p>Highlighted: what I reach for first. The rest I have shipped with in production.</p>
     </div>
     <div class="stack">
-      <div class="group"><b>Build</b><div class="pills"><span class="hi">TypeScript</span><span class="hi">React</span><span class="hi">Next.js</span><span>Angular</span><span>React Native</span><span class="hi">C# / .NET</span><span class="hi">Python</span><span>Django</span><span>Node.js</span><span>Go</span><span>Groovy</span><span>Scala</span><span>C / C++</span><span>SQL / PostgreSQL</span><span>Supabase</span><span class="hi">AI agents · MCP</span></div></div>
+      <div class="group"><b>Build</b><div class="pills"><span class="hi">TypeScript</span><span class="hi">React</span><span class="hi">Next.js</span><span>Angular</span><span>React Native · Expo</span><span>Electron</span><span class="hi">C# / .NET</span><span class="hi">Python</span><span>Django</span><span>Node.js</span><span>Go</span><span>Groovy</span><span>Scala</span><span>C / C++</span><span>SQL / PostgreSQL</span><span>Supabase</span><span class="hi">AI agents · MCP</span></div></div>
       <div class="group"><b>Run</b><div class="pills"><span class="hi">Docker</span><span class="hi">Kubernetes</span><span>Mesos</span><span>nginx</span><span>Concourse CI</span><span class="hi">GitHub Actions</span><span>GitLab CI</span><span>Helm</span><span>Ansible</span><span>Azure</span><span>Redis</span><span>Config as code</span><span>MQTT</span><span>OPC UA</span><span>Modbus</span></div></div>
-      <div class="group"><b>Observe &amp; secure</b><div class="pills"><span class="hi">OpenTelemetry</span><span>Prometheus</span><span class="hi">Grafana</span><span>OpenSearch</span><span>Jaeger</span><span>Zipkin</span><span>Structured logging</span><span>OAuth2 / OIDC</span><span>RBAC</span><span>GDPR</span><span>Tests &amp; CI gates</span></div></div>
+      <div class="group"><b>Observe &amp; secure</b><div class="pills"><span class="hi">OpenTelemetry</span><span>Prometheus</span><span class="hi">Grafana</span><span>OpenSearch</span><span>Jaeger</span><span>Zipkin</span><span>Structured logging</span><span>OAuth2 / OIDC</span><span>RBAC</span><span>Mobile security</span><span>GDPR</span><span>Tests &amp; CI gates</span></div></div>
     </div>
   </div>
 </section>
